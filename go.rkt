@@ -53,3 +53,17 @@
           (λ (bc1 bc2)
             (< (vector-ref bc1 0) (vector-ref bc2 0)))))
   (plot (discrete-histogram b+c/s)))
+
+(struct foto (pt dt ss) #:transparent) ;; path, date, seconds
+
+(define fotos
+  (filter-map (λ (p)
+                (define fn (path->string p))
+                (cond
+                  [(regexp-match fn-r fn) => (λ (r)
+                                               (define d (regexp->date r))
+                                               (foto p d (date->seconds d)))]
+                  [else false]))
+              all-files/path))
+
+(check-equal? (length fotos) (length all-files/sec))
