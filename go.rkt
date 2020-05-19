@@ -74,3 +74,25 @@
           (< (foto-ss f1) (foto-ss f2)))))
 
 (check-equal? (length fotos) (length fotos/sorted))
+
+(define (clusters fs/s)
+  (cond
+    [(empty? fs/s) empty]
+    [(cons? fs/s)
+     (let-values ([(cl r) ;; cluster, rest
+                   (make-cluster fs/s (foto-ss (first fs/s)))])
+       (cons cl (clusters r)))]))
+
+(define (make-cluster fs/s latest-ts)
+  (define (helper fs/s latest-ts acc)
+    (match fs/s
+      [(list) (values acc empty)]
+      [(list-rest hd tl)
+       (if (< (- (foto-ss hd) latest-ts) time-gap/seconds)
+           (helper tl (foto-ss hd) (cons hd acc))
+           (values acc fs/s))]))
+  (helper fs/s latest-ts empty))
+
+(define cs (clusters fotos/sorted))
+
+(check-equal? (length fotos/sorted) (apply + (map length cs)))
