@@ -110,3 +110,18 @@
                 (println cluster-path)
                 (make-directory cluster-path)))
             cs))
+
+(define (move-files)
+  (define clusters-path (build-path target-dir clusters-dir))
+  (for-each (λ (c)
+              (define cluster-dir-name (foto-pt (first c)))
+              (define cluster-path (build-path clusters-path cluster-dir-name))
+              (for-each (λ (f)
+                          (define full-file-path (build-path target-dir (foto-pt f)))
+                          (when (file-exists? full-file-path)
+                            (println full-file-path)
+                            (rename-file-or-directory
+                             full-file-path
+                             (build-path clusters-path cluster-dir-name (foto-pt f)))))
+                        c))
+            cs))
