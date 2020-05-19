@@ -36,3 +36,6 @@
 
 (define time-gap/days 2)
 (define time-gap/seconds (* 60 60 24 time-gap/days))
+
+(define all-but-last (take all-files/sec (sub1 (length all-files/sec))))
+(define time-diffs (map - (rest all-files/sec) all-but-last))
