@@ -2,6 +2,7 @@
 
 (require racket/date)
 (require math plot)
+(require rackunit)
 
 (define target-dir "/Users/sk/Dropbox/Camera Uploads/")
 
@@ -34,6 +35,8 @@
        (map regexp->date
             (filter-map (λ (f) (regexp-match fn-r (path->string f)))
                         all-files/path))))
+
+(check-equal? (length all-files/path) (+ (length (non-matching)) (length all-files/sec)))
 
 (define time-gap/days 2)
 (define time-gap/seconds (* 60 60 24 time-gap/days))
