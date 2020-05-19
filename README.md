@@ -9,7 +9,7 @@ for it. Caveat cloner.)
 Rather, I wanted to document the steps I took to arrive at this
 program. We've been doing research on, and reading, papers on software
 development methods and tools, and I thought it'd be interesting to
-have a case study that I have intimate knowledge of to for future
+have a case study that I have intimate knowledge of for future
 reference.
 
 Plus, it's a way to stash some code I may run again in a few years.
