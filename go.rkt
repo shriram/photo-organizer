@@ -1,5 +1,7 @@
 #lang racket
 
+(require racket/date)
+
 (define target-dir "/Users/sk/Dropbox/Camera Uploads/")
 
 (define all-files/path (directory-list target-dir))
@@ -25,3 +27,9 @@
   (match nums
     [(list year month day hh mm ss)
      (date ss mm hh day month year 0 0 false 0)]))
+
+(define all-files/sec
+  (map date->seconds
+       (map regexp->date
+            (filter-map (λ (f) (regexp-match fn-r (path->string f)))
+                        all-files/path))))
