@@ -33,3 +33,6 @@
        (map regexp->date
             (filter-map (λ (f) (regexp-match fn-r (path->string f)))
                         all-files/path))))
+
+(define time-gap/days 2)
+(define time-gap/seconds (* 60 60 24 time-gap/days))
