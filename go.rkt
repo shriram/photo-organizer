@@ -67,3 +67,10 @@
               all-files/path))
 
 (check-equal? (length fotos) (length all-files/sec))
+
+(define fotos/sorted
+  (sort fotos
+        (λ (f1 f2)
+          (< (foto-ss f1) (foto-ss f2)))))
+
+(check-equal? (length fotos) (length fotos/sorted))
