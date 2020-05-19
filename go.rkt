@@ -5,6 +5,7 @@
 (require rackunit)
 
 (define target-dir (string->path "/Users/sk/Dropbox/Camera Uploads/"))
+(define clusters-dir "Clusters")
 
 (define all-files/path (directory-list target-dir))
 
@@ -96,3 +97,16 @@
 (define cs (clusters fotos/sorted))
 
 (check-equal? (length fotos/sorted) (apply + (map length cs)))
+
+(define (make-dirs)
+  (define clusters-path (build-path target-dir clusters-dir))
+  (unless (directory-exists? clusters-path)
+    (println clusters-path)
+    (make-directory clusters-path))
+  (for-each (λ (c)
+              (define cluster-dir-name (foto-pt (first c)))
+              (define cluster-path (build-path clusters-path cluster-dir-name))
+              (unless (directory-exists? cluster-path)
+                (println cluster-path)
+                (make-directory cluster-path)))
+            cs))
