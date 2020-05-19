@@ -1,6 +1,7 @@
 #lang racket
 
 (require racket/date)
+(require math plot)
 
 (define target-dir "/Users/sk/Dropbox/Camera Uploads/")
 
@@ -39,3 +40,13 @@
 
 (define all-but-last (take all-files/sec (sub1 (length all-files/sec))))
 (define time-diffs (map - (rest all-files/sec) all-but-last))
+
+(define (show)
+  (define-values (bins counts)
+    (count-samples time-diffs))
+  (define b+c (map vector bins counts))
+  (define b+c/s
+    (sort b+c
+          (λ (bc1 bc2)
+            (< (vector-ref bc1 0) (vector-ref bc2 0)))))
+  (plot (discrete-histogram b+c/s)))
