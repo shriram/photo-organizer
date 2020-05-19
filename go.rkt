@@ -16,3 +16,12 @@
 (define (non-matching)
   (filter (λ (f) (not (regexp-match fn-r (path->string f))))
           all-files/path))
+
+(define (regexp->date m)
+  ;; example of a match:
+  ;; '("2020-04-25 11.00.14-2.jpg" "2020" "04" "25" "11" "00" "14")
+  (define bits (rest m)) ;; remove whole string
+  (define nums (map string->number bits))
+  (match nums
+    [(list year month day hh mm ss)
+     (date ss mm hh day month year 0 0 false 0)]))
