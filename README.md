@@ -42,4 +42,6 @@ this a case-study.
 
 ## How to Run
 
-Coming soon.
+Use `cluster` to move the files into temporally proximate directories.
+Edit the value of `target-dir` to point to the sources. The program
+creates a `Clusters` sub-directory of that for the clusters.
