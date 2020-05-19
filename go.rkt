@@ -4,7 +4,7 @@
 (require math plot)
 (require rackunit)
 
-(define target-dir (string->path "/Users/sk/Dropbox/Camera Uploads/"))
+(define target-dir (string->path "/Users/sk/Dropbox/Photographs/To-File/Old/"))
 (define clusters-dir "Clusters")
 
 (define all-files/path (directory-list target-dir))
