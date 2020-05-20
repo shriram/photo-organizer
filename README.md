@@ -40,6 +40,13 @@ That's all. There's no machine learning, nothing. Just dumb code that
 a first-year college student could write. Which is the point of making
 this a case-study.
 
+## Dependency
+
+Install Andy Wingo's `racket-jpeg` library:
+```
+raco pkg install https://github.com/wingo/racket-jpeg.git
+```
+
 ## How to Run
 
 Use `cluster` to move the files into temporally proximate directories.
